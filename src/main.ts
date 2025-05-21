@@ -1,8 +1,9 @@
 import { createApp } from 'vue';
 
-import {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapPopupMarker} from '../src/lib/ymaps';
+import {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapPopupMarker, YMapDefaultMarker} from '../src/lib/ymaps';
 
 import App from './App.vue';
+import Marker  from './components/Marker.vue';
 
 (async () => {
     const app = createApp(App);
@@ -12,6 +13,8 @@ import App from './App.vue';
     app.component('YMapControls', YMapControls);
     app.component('YMapMarker', YMapMarker);
     app.component('YMapPopupMarker', YMapPopupMarker);
+    app.component('YMapDefaultMarker', YMapDefaultMarker);
+    app.component('Marker', Marker);
     app.mount('#app');    
 })();
 
