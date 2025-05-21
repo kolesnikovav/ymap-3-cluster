@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-import {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapPopupMarker} from '../src/lib/ymap';
+import {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapPopupMarker} from '../src/lib/ymaps';
 
 import App from './App.vue';
 

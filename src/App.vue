@@ -6,7 +6,6 @@
       </YMapControls>
       <YMapDefaultSchemeLayer />
       <YMapDefaultFeaturesLayer />
-      <YMapListener @click="handleMapClick" @update="updateHandler" />
       <!-- @vue-ignore -->
       <YMapClusterer :method="gridSizedMethod" :features="competitorsGeopoints">
         <!-- <template #marker="{ feature }">
@@ -36,7 +35,7 @@
 
 import type { DomEvent } from '@yandex/ymaps3-types';
 
-import { type Feature, YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapListener, YMapPopupMarker, YMapClusterer, clusterByGrid } from '../lib/ymap';
+import { type Feature, YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapListener, YMapPopupMarker, YMapClusterer, clusterByGrid } from '../src/lib/ymaps';
 import MarkerPoint from '../components/MarkerPoint.vue';
 
 import type { YMapLocationRequest } from 'ymaps3';
@@ -90,35 +89,11 @@ const closePopup = () => {
 const getGeopoints = async () => {
 }
 
-const updateHandler = async (object: {
-  location: {
-    bounds: [[number, number], [number, number]]
-  }
-}) => {
-
-  // вызываем событие только если новая область выходит за
-  // границы ранее расчитанной области
-  if (
-    currentBounds.value.sw_lat > object.location.bounds[1][1] ||
-    currentBounds.value.sw_lng > object.location.bounds[0][0] ||
-    currentBounds.value.ne_lat < object.location.bounds[0][1] ||
-    currentBounds.value.ne_lng < object.location.bounds[1][0]
-  ) {
-    const lngAdd = (object.location.bounds[1][0] - object.location.bounds[0][0]) / 2;
-    const latAdd = (object.location.bounds[0][1] - object.location.bounds[1][1]) / 2;
-
-    currentBounds.value.sw_lat = object.location.bounds[1][1] - latAdd;
-    currentBounds.value.sw_lng = object.location.bounds[0][0] - lngAdd;
-    currentBounds.value.ne_lat = object.location.bounds[0][1] + latAdd;
-    currentBounds.value.ne_lng = object.location.bounds[1][0] + lngAdd;
-    await getGeopoints();
-  }
-};
-
 onMounted(async () => {
   await ymaps3.ready;
   //@ts-ignore
   const b = mapEl.value?.entity?.bounds;
+  console.log(b);
   if (b) {
     const lngAdd = (b[1][0] - b[0][0]) / 2;
     const latAdd = (b[0][1] - b[1][1]) / 2;
