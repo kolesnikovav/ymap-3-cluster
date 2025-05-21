@@ -34,6 +34,7 @@
 <script lang="ts" setup>
 
 import type { DomEvent } from '@yandex/ymaps3-types';
+import {getRandomPoints} from './common';
 
 import { type Feature, YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapListener, YMapPopupMarker, YMapClusterer, clusterByGrid } from '../src/lib/ymaps';
 import MarkerPoint from '../components/MarkerPoint.vue';
@@ -93,6 +94,12 @@ onMounted(async () => {
   await ymaps3.ready;
   //@ts-ignore
   const b = mapEl.value?.entity?.bounds;
+  const points = getRandomPoints(1000, b);
+  competitorsGeopoints.value = points;
+  console.log({points});
+
+
+
   console.log(b);
   if (b) {
     const lngAdd = (b[1][0] - b[0][0]) / 2;
