@@ -2,8 +2,8 @@ import type { LngLatBounds, LngLat, Feature } from "ymaps3";
 
 // Function for generating a pseudorandom number
 const seed = (s: number) => () => {
-    s = Math.sin(s) * 10000;
-    return s - Math.floor(s);
+    const a = Math.sin(s) * 10000;
+    return a - Math.floor(s);
 };
 
 const rnd = seed(10000); // () => Math.random()
