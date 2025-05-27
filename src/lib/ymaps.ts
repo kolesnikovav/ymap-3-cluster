@@ -7,7 +7,7 @@ const [ymaps3Vue] = await Promise.all([ymaps3.import('@yandex/ymaps3-vuefy'),yma
 ]) ,ymaps3.ready]);
 
 export const vuefy = ymaps3Vue.vuefy.bindTo(Vue);
-export const {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker, YMapControls, YMapControl, YMapListener} = vuefy.module(ymaps3);
+export const {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker, YMapControls, YMapControl, YMapListener, YMapEntity} = vuefy.module(ymaps3);
 //@ts-ignore
 export const {YMapPopupMarker, YMapDefaultMarker} = vuefy.module(await ymaps3.import('@yandex/ymaps3-default-ui-theme'));
 //@ts-ignore

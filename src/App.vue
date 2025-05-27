@@ -6,74 +6,66 @@
       </YMapControls>
       <YMapDefaultSchemeLayer />
       <YMapDefaultFeaturesLayer />
-      <!-- @vue-ignore -->
-      <YMapClusterer :method="gridSizedMethod" :features="competitorsGeopoints">
-        <template #marker="{ feature }">
-          <Marker :feature="feature" />
-        </template>        
-        <!-- <template #marker="{ feature }">
-          <Marker :feature="feature" />
-        </template>
-        <template #cluster="{ coordinates, features }">
-          <Cluster :onClick="() => onClusterClick(features)" :coordinates="coordinates" :features="features" />
-        </template> -->
+      <YMapClusterer :method="gridSizedMethod" :features="competitorsGeopoints" :marker = "makeMarker" :cluster = "makeCluster">
       </YMapClusterer>
-      <Marker v-for="competitor in competitorsGeopoints" :key="competitor.id" :feature="competitor" />
-
-      <!-- <YMapMarker v-for="competitor in competitorsGeopoints" :key="competitor.id" :coordinates="competitor.coordinates"
-        :draggable="true" @click="handleMarkerClick">
-        <div class="cursor-pointer" style="margin-top: -33px; margin-left: -12px;">
-          <img src="../assets/map-marker-red.svg" width=25 height=33>
-        </div>
-      </YMapMarker> -->
     </YMap>
   </div>
 </template>
 
 <script lang="ts" setup>
 
-import type { DomEvent } from '@yandex/ymaps3-types';
 import {getRandomPoints} from './common';
 
-import { type Feature, YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapListener, YMapClusterer, clusterByGrid } from '../src/lib/ymaps';
+import { type Feature, YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapClusterer, clusterByGrid, YMapEntity } from '../src/lib/ymaps';
 
-import type { YMapLocationRequest } from 'ymaps3';
-import { onMounted, ref, useTemplateRef } from 'vue';
-import type { Competitor } from '../types';
-import { competitorStatusToNumber} from '../utils';
+import type { LngLat, YMapLocationRequest } from 'ymaps3';
+
+import { onMounted, ref, useTemplateRef, h } from 'vue';
 
 const mapEl = useTemplateRef('ymapInstance');
 
 const gridSizedMethod = clusterByGrid({gridSize: 64});
-
-
-
-const currentBounds = ref({
-  sw_lat: 0,
-  sw_lng: 0,
-  ne_lat: 0,
-  ne_lng: 0
-})
 
 const LOCATION: YMapLocationRequest = {
   center: [37.588144, 55.733842],
   zoom: 9
 };
 
-type CompetitorData = {
-  id: number;
-  name: string;
-  address: string;
-  city: string;
-  coordinates: [number, number];
-}
-
-const editedCompetitor = ref({} as Competitor);
-
 const competitorsGeopoints = ref([] as Feature[]);
 
-const popup = ref(false);
-const popupCoordinates = ref([0, 0]);
+ type YMapSomeEntityProps = {
+  name?: string;
+ };
+ const defaultProps = {
+  name: 'entity'
+ };
+ class YMapSomeEntity extends YMapEntity<YMapSomeEntityProps, typeof defaultProps> {
+  static defaultProps = defaultProps;
+  public isAttached: boolean;
+  constructor(props: YMapSomeEntityProps) {
+      super(props);
+      this.isAttached = false
+      // Additional actions can be taken in the constructor of a class.
+  }
+  protected _onAttach(): void {
+      this.isAttached = true;
+      // Additional actions can be taken when an Entity is attached.
+  }
+  // ...
+ }
+
+const makeMarker = (feature: Feature) => {
+  return new YMapSomeEntity({
+    name: feature.properties.name
+  });
+}
+
+const makeCluster = (coordinates: LngLat, feature: Feature) => {
+  return new YMapSomeEntity({
+    name: feature.properties.name
+  });
+}
+
 
 onMounted(async () => {
   await ymaps3.ready;
