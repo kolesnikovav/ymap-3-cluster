@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-import {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapPopupMarker, YMapDefaultMarker} from '../src/lib/ymaps';
+import {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YMapMarker, YMapPopupMarker, YMapDefaultMarker,  YMapFeature} from '../src/lib/ymaps';
 
 import App from './App.vue';
 import Marker  from './components/Marker.vue';
@@ -15,6 +15,7 @@ import Cluster  from './components/Cluster.vue';
     app.component('YMapMarker', YMapMarker);
     app.component('YMapPopupMarker', YMapPopupMarker);
     app.component('YMapDefaultMarker', YMapDefaultMarker);
+    app.component('YMapFeature', YMapFeature);
     app.component('Marker', Marker);
     app.component('Cluster', Cluster);
     app.mount('#app');    
