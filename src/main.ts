@@ -4,6 +4,7 @@ import {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapControls, YM
 
 import App from './App.vue';
 import Marker  from './components/Marker.vue';
+import Cluster  from './components/Cluster.vue';
 
 (async () => {
     const app = createApp(App);
@@ -15,6 +16,7 @@ import Marker  from './components/Marker.vue';
     app.component('YMapPopupMarker', YMapPopupMarker);
     app.component('YMapDefaultMarker', YMapDefaultMarker);
     app.component('Marker', Marker);
+    app.component('Cluster', Cluster);
     app.mount('#app');    
 })();
 

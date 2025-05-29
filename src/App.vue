@@ -7,6 +7,9 @@
       <YMapDefaultSchemeLayer />
       <YMapDefaultFeaturesLayer />
       <YMapClusterer :method="gridSizedMethod" :features="competitorsGeopoints" :marker = "makeMarker" :cluster = "makeCluster">
+            <template #cluster="{coordinates, features}">
+              <Cluster :coordinates="coordinates" :features="features" />
+            </template>        
       </YMapClusterer>
     </YMap>
   </div>
