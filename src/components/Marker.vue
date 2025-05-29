@@ -1,6 +1,6 @@
 <template>
       <YMapMarker
-        :coordinates="feature.geometry?.coordinates"
+        :coordinates="feature?.geometry?.coordinates"
       >
         <div class="circle-red">
         </div>

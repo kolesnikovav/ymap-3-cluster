@@ -26,7 +26,7 @@ import { type Feature, YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, Y
 
 import type { LngLat, YMapLocationRequest } from 'ymaps3';
 
-import { onMounted, ref, useTemplateRef, h } from 'vue';
+import { onMounted, ref, useTemplateRef} from 'vue';
 
 const mapEl = useTemplateRef('ymapInstance');
 
@@ -66,7 +66,7 @@ const makeMarker = (feature: Feature) => {
   });
 }
 
-const makeCluster = (coordinates: LngLat, feature: Feature) => {
+const makeCluster = (_coordinates: LngLat, feature: Feature) => {
   return new YMapSomeEntity({
     name: feature.properties.name
   });
