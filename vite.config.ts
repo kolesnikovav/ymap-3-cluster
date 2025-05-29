@@ -5,18 +5,6 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [
     vue({
-        features: {
-          componentIdGenerator: (
-            filepath: string,
-            _source: string,
-            _isProduction: boolean | undefined,
-            getHash: (text: string) => string,
-          ) => {
-            const hs = `illegal-app-${getHash(filepath)}`;
-            return hs;
-          }
-
-        },
         template: {
           compilerOptions: {
             isCustomElement: (tag) => ['YMapControl'].includes(tag)

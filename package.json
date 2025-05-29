@@ -1,6 +1,11 @@
 {
   "name": "ymap-3-cluster",
+  "description": "Тестовый проект для отображения кластеров на яндекс карте (апи 3.0) Vue",
   "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "Aleksandr Kolesnikov"
+  },
   "version": "0.0.0",
   "type": "module",
   "scripts": {
