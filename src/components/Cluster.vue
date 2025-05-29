@@ -5,7 +5,7 @@
       >
         <div class="circle">
           <div class="circle-content">
-            <span class="circle-text">{{ features.length }}</span>
+            <span class="circle-text">{{ features?.length }}</span>
           </div>
         </div>
       </YMapMarker>        

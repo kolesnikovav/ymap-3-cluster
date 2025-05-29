@@ -1,14 +1,31 @@
 <template>
-    <YMapDefaultMarker iconName="landmark" :coordinates="props.feature.geometry?.coordinates" />
+      <YMapMarker
+        :coordinates="feature.geometry?.coordinates"
+      >
+        <div class="circle-red">
+        </div>
+      </YMapMarker>        
 </template>
 
-<script setup lang="ts">
-import type { Feature } from "ymaps3";
-import { YMapDefaultMarker } from "../lib/ymaps";
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-const props = defineProps<{
-    feature: Feature
-}>();
-
+export default defineComponent({
+    name: 'Marker',
+    props: {
+        feature: Object,
+    },    
+});
 
 </script>
+
+<style lang="css" scoped>
+.circle-red {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
